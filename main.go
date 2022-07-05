@@ -71,11 +71,12 @@ func main() {
 // It will either load the alpha configuration (if alphaConfig is given)
 // or the legacy configuration.
 func loadConfiguration(config, alphaConfig string, extraFlags *pflag.FlagSet, args []string) (*options.Options, error) {
+	return loadLegacyOptions(config, extraFlags, args)
+	
 	if alphaConfig != "" {
 		logger.Printf("WARNING: You are using alpha configuration. The structure in this configuration file may change without notice. You MUST remove conflicting options from your existing configuration.")
 		return loadAlphaOptions(config, alphaConfig, extraFlags, args)
 	}
-	return loadLegacyOptions(config, extraFlags, args)
 }
 
 // loadLegacyOptions loads the old toml options using the legacy flagset
